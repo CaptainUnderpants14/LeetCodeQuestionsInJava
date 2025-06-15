@@ -1,0 +1,43 @@
+//Solution which i thought of first identifying the zero element/s shift all the elements ahead of it by one place 
+//and then fill the blank space at the end with a zero (O(n^2) TC but no extra space)
+
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int n = nums.length;
+        if (n == 0){
+            return;
+        }
+        for(int i = 0; i < n; i++){
+            if(nums[i] == 0){
+                for (int j = i; j < n - 1; j++){
+                    nums[j] = nums[j+1];
+                }
+                nums[n - 1] = 0;
+                n--;
+                i--;
+            }
+        }
+    }
+}
+
+//efficient solution with O(n) TC
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int pos = 0;  // Position to place non-zero
+
+        // Step 1: Move all non-zero elements forward
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[pos] = nums[i];
+                pos++;
+            }
+        }
+
+        // Step 2: Fill the rest with zeroes
+        while (pos < nums.length) {
+            nums[pos] = 0;
+            pos++;
+        }
+    }
+}
+
